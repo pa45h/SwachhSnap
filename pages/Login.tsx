@@ -41,7 +41,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, onShowRegister }) => {
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-[#1A73E8] rounded-3xl mb-3 shadow-xl shadow-blue-100">
-            <img className='rounded-2xl' src="./assets/logo.jpeg" alt="" />
+            <img className='rounded-2xl' src="./assets/logo.svg" alt="" />
           </div>
         </div>
 
