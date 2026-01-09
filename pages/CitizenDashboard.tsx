@@ -31,7 +31,7 @@ export const CitizenDashboard: React.FC = () => {
   const currentUser = auth.currentUser;
 
   // ==========================
-  // AUTH
+  // SIGN OUT
   // ==========================
   const handleSignOut = async () => {
     await signOut(auth);
@@ -63,7 +63,7 @@ export const CitizenDashboard: React.FC = () => {
   // ==========================
   const handleNewReport = async () => {
     try {
-      await getCurrentPosition(); // permission check
+      await getCurrentPosition();
       setShowCamera(true);
     } catch {
       alert("Location permission required");
@@ -75,14 +75,10 @@ export const CitizenDashboard: React.FC = () => {
 
     setLoading(true);
     try {
-      // 📍 LOCATION AT SUBMIT TIME
       const pos = await getCurrentPosition();
       const latitude = pos.coords.latitude;
       const longitude = pos.coords.longitude;
 
-      console.log("LAT:", latitude, "LNG:", longitude);
-
-      // ☁️ IMAGE UPLOAD
       const imageUrl = await uploadToCloudinary(image);
 
       await firebaseService.createComplaint({
@@ -142,16 +138,27 @@ export const CitizenDashboard: React.FC = () => {
   // ==========================
   return (
     <div className="space-y-12 pb-20 text-black">
-      {/* REPORT */}
+
+      {/* HEADER */}
       <section className="bg-white rounded-2xl p-6 shadow border">
-        <div className="flex justify-between mb-6">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold">Report an Issue</h2>
+
           <div className="flex gap-3">
             <button
               onClick={handleNewReport}
+              disabled={loading}
               className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold"
             >
               📸 New Report
+            </button>
+
+            {/* 🔴 SIGN OUT BUTTON */}
+            <button
+              onClick={handleSignOut}
+              className="bg-red-50 text-red-600 px-5 py-3 rounded-xl font-bold border border-red-200"
+            >
+              Sign Out
             </button>
           </div>
         </div>
@@ -256,9 +263,9 @@ export const CitizenDashboard: React.FC = () => {
                   </span>
                 </div>
 
-                {/* 📍 LOCATION DISPLAY */}
                 <p className="text-xs text-gray-500 mt-1">
-                  {Number(c.latitude).toFixed(5)}, {Number(c.longitude).toFixed(5)}
+                  {Number(c.latitude).toFixed(5)},{" "}
+                  {Number(c.longitude).toFixed(5)}
                 </p>
 
                 <a

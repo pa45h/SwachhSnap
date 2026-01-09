@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .bgimg{
-    background-image: url('./assets/bgimg.svg');
+    background-image: url('./public/bgimg.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
 }
