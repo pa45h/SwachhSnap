@@ -146,11 +146,7 @@ export const AdminDashboard: React.FC = () => {
         <h2 className="text-2xl font-bold">Admin Console</h2>
         <div className="flex gap-3">
           <button
-            onClick={() => 
-              {
-                setViewMode(viewMode === "list" ? "map" : "list")
-              }}
-            
+            onClick={() => setViewMode(viewMode === "list" ? "map" : "list")}
             className="px-6 py-3 rounded-xl font-bold border"
           >
             {viewMode === "list" ? "🗺 Map View" : "📋 List View"}
